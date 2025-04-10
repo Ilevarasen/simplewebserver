@@ -37,98 +37,76 @@ Start the server script and check for errors.
 Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
-
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    from http.server import HTTPServer, BaseHTTPRequestHandler
-content="""
-<!DOCTYPE html>
+from http.server import HTTPServer,BaseHTTPRequestHandler
+
+content='''<!doctype html>
 <html>
 <head>
-	<title>Laptop Specifications</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-		
-		th, td {
-			border: 1px solid #ddd;
-			padding: 10px;
-			text-align: left;
-		}
-		
-		th {
-			background-color: #f0f0f0;
-		}
-	</style>
+<title> My Web Server</title>
+<style>
+    table,tr,td,th
+    {
+    
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:10px;
+    text-align:center;
+    }
+    </style>
 </head>
 <body>
-	<h1>Laptop Specifications</h1>
-	<center><table>
-		<tr>
-			<th>Specification</th>
-			<th>Details</th>
-		</tr>
-		<tr>
-			<td>Processor</td>
-			<td>11th Gen Intel Core i7-1165G7</td>
-		</tr>
-		<tr>
-			<td>RAM</td>
-			<td>16 GB DDR4</td>
-		</tr>
-		<tr>
-			<td>Storage</td>
-			<td>512 GB SSD</td>
-		</tr>
-		<tr>
-			<td>Graphics Card</td>
-			<td>NVIDIA GeForce MX450</td>
-		</tr>
-		<tr>
-			<td>Display</td>
-			<td>14-inch Full HD (1920x1080)</td>
-		</tr>
-		<tr>
-			<td>Operating System</td>
-			<td>Windows 11 Home</td>
-		</tr>
-		<tr>
-			<td>Battery Life</td>
-			<td>Up to 8 hours</td>
-		</tr>
-		<tr>
-			<td>Weight</td>
-			<td>1.5 kg</td>
-		</tr>
-	</table></center>
+<center><h1 style="font-family: cursive;"><u>TCP/IP PROTOCOLS</u></h1><br>
+</center>
+<table>
+<tr>
+<th>S.NO</th>
+<th>LAYER</th>
+<th>PROTOCOLS</th>
+</tr>
+    
+<tr>
+<td>1.</td>
+<td>Application layer protocol</td>
+<td>HTTPS,FTP,DNS</td>
+</tr>
+    
+<tr>
+<td>2.</td>
+<td>Transport layer protocol</td>
+<td>TCP</td>
+    
+</tr>
+    
+<tr>
+<td>3.</td>
+<td>Internet layer protocol</td>
+<td>IP</td>
+</tr>
+    
+<tr>
+<td>4.</td>
+<td>Link layer protocol</td>
+<td>MAC</td>
+</tr>
+</table>
 </body>
 </html>
-"""
-class myhandler(BaseHTTPRequestHandler):
+'''
+
+class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print("request received")
-        self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
+        print("Get request received...")
+        self.send_response(200) 
+        self.send_header("content-type", "text/html")       
         self.end_headers()
         self.wfile.write(content.encode())
-server_address = ('',8000)
-httpd= HTTPServer(server_address,myhandler)
-print("my webserver is running...")
+
+print("My webserver is running") 
+server_address =('',8008)
+httpd = HTTPServer(server_address,MyServer)
 httpd.serve_forever()
-</body>
-</html>
-
 ```
-
 ## OUTPUT:
 
 ![Screenshot 2025-03-21 085315](https://github.com/user-attachments/assets/f40750f8-7dbc-47c1-ad29-5f10f60163cb)
